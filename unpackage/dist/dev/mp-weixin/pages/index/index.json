@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "uni-app",
+  "usingComponents": {
+    "tn-button": "/tuniao-ui/components/tn-button/tn-button"
+  }
+}
