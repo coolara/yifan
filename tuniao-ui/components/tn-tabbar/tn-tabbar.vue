@@ -137,12 +137,12 @@
       // 背景颜色
       bgColor: {
         type: String,
-        default: '#FFFFFF'
+        default: '#fff'
       },
       // 图标大小
       iconSize: {
         type: Number,
-        default: 40
+        default: 44
       },
       // 字体大小
       fontSize: {
@@ -300,9 +300,9 @@
             if (this.$tn.color.getFontColorStyle(this.activeIconColor) !== '') {
               style.backgroundColor = this.activeIconColor
             }
-            style.width = `${this.outHeight - 35}rpx`
-            style.height = `${this.outHeight - 35}rpx`
-            style.top = `-${this.outHeight * 0.15}rpx`
+            style.width = `${this.outHeight - 12}rpx`
+            style.height = `${this.outHeight - 12}rpx`
+            style.top = `-${this.outHeight * 0.44}rpx`
             
             return style
           }
@@ -435,19 +435,19 @@
         transform: translateX(-50%);
         
         &--shadow {
-          box-shadow: 0rpx -10rpx 30rpx 0rpx rgba(0, 0, 0, 0.05);
+          // box-shadow: 0rpx -10rpx 30rpx 0rpx rgba(0, 0, 0, 0.05);
           
-          &::before {
-            content: " ";
-            position: absolute;
-            width: 100%;
-            height: 50rpx;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-            background-color: inherit;
-          }
+          // &::before {
+          //   content: " ";
+          //   position: absolute;
+          //   width: 100%;
+          //   height: 50rpx;
+          //   bottom: 0;
+          //   left: 0;
+          //   right: 0;
+          //   margin: auto;
+          //   background-color: inherit;
+          // }
         }
         
         &--animation {

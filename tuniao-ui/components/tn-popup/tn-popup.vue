@@ -8,7 +8,7 @@
     <!-- mask -->
     <view
       class="tn-popup__mask"
-      :class="[{'tn-popup__mask--show': showPopup && mask}]"
+      :class="[{'tn-popup__mask--show': showPopup && mask, 'tn-popup__mask--show_bg': showPopup && mask && maskBg}]"
       :style="{zIndex: elZIndex - 2}"
       @tap="maskClick"
       @touchmove.stop.prevent = "() => {}"
@@ -46,13 +46,13 @@
           :style="[closeBtnStyle, {zIndex: elZIndex}]"
           @tap="close"
         ></view>
-        <scroll-view scroll-y class="tn-popup__content__scroll-view">
+        <scroll-view class="tn-popup__content__scroll-view">
           <slot></slot>
         </scroll-view>
       </view>
       
       <!-- 除居中外的其他情况 -->
-      <scroll-view scroll-y v-else class="tn-popup__content__scroll-view">
+      <scroll-view v-else class="tn-popup__content__scroll-view">
         <slot></slot>
       </scroll-view>
       <!-- 关闭按钮 -->
@@ -180,6 +180,11 @@
       popup: {
       	type: Boolean,
       	default: true
+      },
+	  // 加深mask背景色 rgba(0,0,0,0.7)
+	  maskBg: {
+      	type: Boolean,
+      	default: false
       },
     },
     computed: {
@@ -365,7 +370,6 @@
     right: 0;
     bottom: 0;
     overflow: hidden;
-    z-index: 29091 !important;
     
     &__content {
       /* #ifndef APP-NVUE */
@@ -486,6 +490,10 @@
       
       &--show {
         opacity: 1;
+		
+		&_bg{
+			background-color: rgba(0, 0, 0, 0.7);
+		}
       }
     }
   }

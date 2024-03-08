@@ -33,39 +33,28 @@
       @focus="onFocus"
       @confirm="onConfirm"
     />
-	<view v-else>
-		
-		<view
-		 v-if="type === 'select'"
-		 class="tn-input__text"
-		 > 
-		 {{defaultValue}}
-		 </view>
-		 
-		 <input
-		   v-else
-		   class="tn-input__input"
-		   :type="type === 'password' ? 'text' : type"
-		   :style="[inputStyle]"
-		   :value="defaultValue"
-		   :password="type === 'password' && !showPassword"
-		   :placeholder="placeholder"
-		   :placeholderStyle="placeholderStyle"
-		   :disabled="disabled || type === 'select'"
-		   :maxlength="maxLength"
-		   :focus="focus"
-		   :confirmType="confirmType"
-		   :selectionStart="elSelectionStart"
-		   :selectionEnd="elSelectionEnd"
-		   :cursorSpacing="cursorSpacing"
-		   :showConfirmBar="showConfirmBar"
-		   @input="handleInput"
-		   @blur="handleBlur"
-		   @focus="onFocus"
-		   @confirm="onConfirm"
-		 />
-	</view>
-    
+    <input
+      v-else
+      class="tn-input__input"
+      :type="type === 'password' ? 'text' : type"
+      :style="[inputStyle]"
+      :value="defaultValue"
+      :password="type === 'password' && !showPassword"
+      :placeholder="placeholder"
+      :placeholderStyle="placeholderStyle"
+      :disabled="disabled || type === 'select'"
+      :maxlength="maxLength"
+      :focus="focus"
+      :confirmType="confirmType"
+      :selectionStart="elSelectionStart"
+      :selectionEnd="elSelectionEnd"
+      :cursorSpacing="cursorSpacing"
+      :showConfirmBar="showConfirmBar"
+      @input="handleInput"
+      @blur="handleBlur"
+      @focus="onFocus"
+      @confirm="onConfirm"
+    />
     
     <!-- 右边的icon -->
     <view class="tn-input__right-icon tn-flex tn-flex-col-center">
@@ -386,15 +375,6 @@
       font-size: 28rpx;
       color: $tn-font-color;
       flex: 1;
-    }
-	
-    &__text {
-      font-size: 28rpx;
-      color: $tn-font-color;
-      flex: 1;
-	  min-width: 296rpx;
-	  max-width: 100%;
-	  text-overflow:clip;
     }
     
     &__textarea {

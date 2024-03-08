@@ -12,7 +12,7 @@
     >
       <view class="tn-picker__content" :style="{ zIndex: elZIndex }">
         <!-- 顶部 -->
-        <view class="tn-picker__content__header" @touchmove.stop.prevent>
+        <view class="tn-picker__content__header tn-border-solid-bottom" @touchmove.stop.prevent>
           <!-- 取消按钮 -->
           <view
             class="tn-picker__content__header__btn tn-picker__content__header--cancel"
@@ -242,7 +242,7 @@
       // 取消按钮的文字
       cancelText: {
         type: String,
-        default: '取 消'
+        default: '取消'
       },
       // 取消按钮的颜色
       cancelColor: {
@@ -252,7 +252,7 @@
       // 确认按钮的文字
       confirmText: {
         type: String,
-        default: '确 认'
+        default: '确认'
       },
       // 确认按钮的演示
       confirmColor: {
@@ -665,8 +665,7 @@
         flex-direction: row;
         width: 100%;
         height: 90rpx;
-        margin-top: 10rpx;
-        padding: 0 30rpx;
+        padding: 0 40rpx;
         align-items: center;
         justify-content: space-between;
         box-sizing: border-box;
@@ -689,10 +688,7 @@
         }
         
         &--confirm {
-          background-color: #07C160;
-          color: #FFFFFF;
-          padding: 10rpx 25rpx;
-          border-radius: 10rpx;
+          color: $tn-main-color;
         }
       }
       

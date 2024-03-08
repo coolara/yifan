@@ -12,13 +12,15 @@
         :fontColor="fontColor"
         :fontSize="fontSize"
         :fontUnit="fontUnit"
-        :list="valueList"
+        :list="list"
         :show="show"
         :playStatus="playStatus"
         :leftIcon="leftIcon"
+		:leftImg="leftImg"
         :leftIconName="leftIconName"
         :leftIconSize="leftIconSize"
         :rightIcon="rightIcon"
+		:rightImg="rightImg"
         :rightIconName="rightIconName"
         :rightIconSize="rightIconSize"
         :closeBtn="closeBtn"
@@ -38,14 +40,16 @@
         :fontColor="fontColor"
         :fontSize="fontSize"
         :fontUnit="fontUnit"
-        :list="valueList"
+        :list="list"
         :show="show"
         :mode="mode"
         :playStatus="playStatus"
         :leftIcon="leftIcon"
+		:leftImg="leftImg"
         :leftIconName="leftIconName"
         :leftIconSize="leftIconSize"
         :rightIcon="rightIcon"
+		:rightImg="rightImg"
         :rightIconName="rightIconName"
         :rightIconSize="rightIconSize"
         :closeBtn="closeBtn"
@@ -76,18 +80,6 @@
           return []
         }
       },
-      keyName:{
-        type:String,
-        default: 'key'
-      },
-      valueName:{
-        type:String,
-        default: 'value'
-      },
-      keyValue:{
-        type:String,
-        default: undefined
-      },
       // 是否显示
       show: {
         type: Boolean,
@@ -110,6 +102,11 @@
         type: Boolean,
         default: true
       },
+	  // 是否显示左边图标 - 图片
+	  leftImg: {
+	    type: Boolean,
+	    default: true
+	  },
       // 左边图标的名称
       leftIconName: {
         type: String,
@@ -125,6 +122,11 @@
         type: Boolean,
         default: false
       },
+	  // 是否显示右边的图标 - 图片
+	  rightImg: {
+	    type: Boolean,
+	    default: false
+	  },
       // 右边图标的名称
       rightIconName: {
         type: String,
@@ -179,60 +181,23 @@
     computed: {
       // 当设置了show为false，或者autoHidden为true且list为空时，不显示通知
       showNotice() {
-         return !(this.show === false || (this.autoHidden && this.list.length === 0))
+        if (this.show === false || (this.autoHidden && this.list.length === 0)) return false
+        else return true
       }
-    },
-    watch:{
-      keyValue:{
-        handler(value) {
-            this.loadList();
-        },
-        deep: true
-      },
     },
     data() {
       return {
-        //显示的值
-        valueList:[],
+        
       }
-    },
-    mounted() {
-      this.loadList();
     },
     methods: {
       // 点击了通知栏
       click(index) {
-		let value = this.findValue(index);
-        //如果是对象，返回传入的对象
-        if (this.isObj(value)){
-          this.$emit('click', value)
-        }else {
-          this.$emit('click', index)
-        }
+        this.$emit('click', index)
       },
-	  findValue(findIndex){
-		  let objList = []
-		  for (let index in this.list){
-		    let v = this.list[index];
-		    if (this.isObj(v)){
-		      //判断是否指定key显示，如果是则显示指定的列表，否则就返回所有列表
-		      if (this.keyValue == undefined || v[this.keyName] == this.keyValue){
-					    objList.push(v);
-		      }
-		    }else{
-				 //兼容旧的，旧的直接返回下表
-				return findIndex;
-			}
-		  }
-		  return findIndex >= objList.length ? undefined : objList[findIndex];
-	  },
       // 点击了关闭按钮
       close() {
         this.$emit('close')
-      },
-      //判断元素是否是对象
-      isObj(value){
-        return typeof(value) === 'object';
       },
       // 点击了左边图标
       clickLeftIcon() {
@@ -245,21 +210,6 @@
       // 一个周期滚动结束
       end() {
         this.$emit('end')
-      },
-      loadList() {
-        let tmpList = [];
-        for (let index in this.list) {
-          let v = this.list[index];
-          if (this.isObj(v)) {
-            //判断是否指定key显示，如果是则显示指定的列表，否则就返回所有列表
-            if (this.keyValue == undefined || v[this.keyName] == this.keyValue) {
-              tmpList.push(v[this.valueName]);
-            }
-          } else {
-            tmpList.push(v);
-          }
-        }
-        this.valueList = tmpList;
       }
     }
   }

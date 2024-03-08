@@ -7,7 +7,6 @@
       }"
       @mouseenter="mouseEnterArea"
       @mouseleave="mouseLeaveArea"
-      v-if="show"
     >
       <block
         v-for="(item, index) in lists"
@@ -299,8 +298,7 @@
           y: 0
         },
         timer: null,
-        dragging: false,
-        show:true
+        dragging: false
       }
     },
     watch: {
@@ -553,25 +551,22 @@
         if (index >= 0 && index < this.lists.length) {
           let currentItemIndex = this.lists[index].index
           this.lists.splice(index, 1)
-          this.show = false;
-          setTimeout(()=>{
-            this.show = true;
-            // 重新排列列表信息
-            for (let item of this.lists) {
-              if (item.index > currentItemIndex) {
-                item.index -= 1
+          // 重新排列列表信息
+          for (let item of this.lists) {
+            if (item.index > currentItemIndex) {
+              item.index -= 1
+              item.x = item.positionX * this.baseData.widthPx
+              item.y = item.positionY * this.baseData.heightPx
+              item.positionX = item.index % this.baseData.columns
+              item.positionY = Math.floor(item.index / this.baseData.columns)
+              this.$nextTick(() => {
                 item.x = item.positionX * this.baseData.widthPx
                 item.y = item.positionY * this.baseData.heightPx
-                item.positionX = item.index % this.baseData.columns
-                item.positionY = Math.floor(item.index / this.baseData.columns)
-                this.$nextTick(() => {
-                  item.x = item.positionX * this.baseData.widthPx
-                  item.y = item.positionY * this.baseData.heightPx
-                })
-              }
+              })
             }
-            this.updateAddBtnPositioin()
-          },50)
+          }
+          
+          this.updateAddBtnPositioin()
         }
       },
       // 预览图片
@@ -689,10 +684,8 @@
       updateAddBtnPositioin() {
         if (this.lists.length >= this.maxCount) return
         
-        setTimeout(()=>{
-          this.addBtn.x = (this.lists.length % this.baseData.columns) * this.baseData.widthPx
-          this.addBtn.y = Math.floor(this.lists.length / this.baseData.columns) * this.baseData.heightPx
-        },50);
+        this.addBtn.x = (this.lists.length % this.baseData.columns) * this.baseData.widthPx
+        this.addBtn.y = Math.floor(this.lists.length / this.baseData.columns) * this.baseData.heightPx
       },
       // 获取排序后数据
       sortList() {

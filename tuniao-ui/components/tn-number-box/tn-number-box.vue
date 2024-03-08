@@ -6,7 +6,8 @@
       :class="[
         backgroundColorClass,
         fontColorClass,
-        {'tn-number-box__btn--disabled': disabled || inputValue <= min}
+		{'tn-border-solid': isBorder},
+        {'tn-number-box__btn--disabled': disabled || (inputValue <= min && !isDisabledBgColor)}
       ]"
       :style="{
         backgroundColor: backgroundColorStyle,
@@ -16,9 +17,16 @@
       }"
       @touchstart.stop.prevent="touchStart('minus')"
       @touchend.stop.prevent="clearTimer"
+	  v-if="!isImg"
     >
       <view class="tn-icon-reduce"></view>
     </view>
+	
+	<!-- 减 - 图片版本 -->
+	<view class="tn-number-box__btn__reduce" v-if="isImg">
+		<image :src="reduceImgPath" mode="" @touchstart.stop.prevent="touchStart('minus')"
+      @touchend.stop.prevent="clearTimer"></image>
+	</view>
     
     <!-- 输入框 -->
     <input
@@ -28,6 +36,8 @@
       class="tn-number-box__input"
       :class="[
         fontColorClass,
+		{'tn-number-box__input_height': isImg},
+		{'tn-border-solid': isBorder},
         {'tn-number-box__input--disabled': disabledInput || disabled}
       ]"
       :style="{
@@ -47,7 +57,8 @@
       :class="[
         backgroundColorClass,
         fontColorClass,
-        {'tn-number-box__btn--disabled': disabled || inputValue >= max}
+		{'tn-border-solid': isBorder},
+        {'tn-number-box__btn--disabled': disabled || (inputValue >= max && !isDisabledBgColor)}
       ]"
       :style="{
         backgroundColor: backgroundColorStyle,
@@ -57,9 +68,16 @@
       }"
       @touchstart.stop.prevent="touchStart('plus')"
       @touchend.stop.prevent="clearTimer"
+	  v-if="!isImg"
     >
       <view class="tn-icon-add"></view>
     </view>
+	
+	<!-- 加 - 图片版本 -->
+	<view class="tn-number-box__btn__add" v-if="isImg">
+		<image :src="addImgPath" mode="" @touchstart.stop.prevent="touchStart('plus')"
+      @touchend.stop.prevent="clearTimer"></image>
+	</view>
   </view>
 </template>
 
@@ -133,7 +151,32 @@
       positiveInteger: {
         type: Boolean,
         default: true
-      }
+      },
+	  // 是否禁用加号和减号的背景色（禁用后背景色不会改变）
+	  isDisabledBgColor: {
+		  type: Boolean,
+		  default: false
+	  },
+	  // 是否显示边框
+	  isBorder: {
+		  type: Boolean,
+		  default: false
+	  },
+	  // 加号和减号是否使用图片
+	  isImg: {
+		  type: Boolean,
+		  default: false
+	  },
+	  // 加号图片地址
+	  addImgPath: {
+		  type: String,
+		  default: ''
+	  },
+	  // 减号图片地址
+	  reduceImgPath: {
+		  type: String,
+		  default: ''
+	  }
     },
     computed: {
       getCursorSpacing() {
@@ -365,6 +408,16 @@
         align-items: center;
         background-color: $tn-font-holder-color;
       }
+	  &__add,&__reduce {
+		  display: flex;
+		  flex-direction: row;
+		  justify-content: center;
+		  align-items: center;
+	  		image{
+	  			width: 40rpx;
+	  			height: 40rpx;
+	  		}
+	  }
       
       &__plus {
         border-radius: 0 8rpx 8rpx 0;
@@ -391,6 +444,11 @@
       padding: 0 4rpx;
       margin: 0 6rpx;
       background-color: $tn-font-holder-color;
+	  
+	  &_height{
+		  min-height: 40rpx;
+		  margin: 0;
+	  }
       
       &--disabled {
         color: $tn-font-sub-color !important;

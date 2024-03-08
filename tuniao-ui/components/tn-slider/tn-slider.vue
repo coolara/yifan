@@ -149,9 +149,6 @@
       },
       // 滑动移动中
       touchMove(event) {
-		this._tGetRect('.tn-slider').then(res => {
-		    this.sliderRect = res
-		});
         if (this.disabled) return
         if (!event.changedTouches[0]) return
         
@@ -160,9 +157,7 @@
         if (this.status === 'start') this.$emit('start')
         let movePageX = event.changedTouches[0].pageX
         // 滑块的左边不一定跟屏幕左边接壤，所以需要减去最外层父元素的左边值
-        let marginLeft = this.sliderRect.left;
-		    marginLeft = marginLeft < 0 ? 0 : marginLeft;
-        this.distanceX = movePageX - marginLeft;
+        this.distanceX = movePageX - this.sliderRect.left
         // 获得移动距离对整个滑块的百分比值，此为带有多位小数的值，不能用此更新视图
         // 否则造成通信阻塞，需要每改变一个step值时修改一次视图
         this.newValue = ((this.distanceX / this.sliderRect.width) * (this.max - this.min)) + this.min
@@ -205,9 +200,6 @@
       },
       // 点击事件
       click(event) {
-		this._tGetRect('.tn-slider').then(res => {
-			this.sliderRect = res
-		})
         if (this.disabled) return
         // 直接点击的情况，计算方式和touchMove方法一致
         const value = (((event.detail.x - this.sliderRect.left) / this.sliderRect.width) * (this.max - this.min)) + this.min

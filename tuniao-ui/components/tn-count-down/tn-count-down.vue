@@ -9,18 +9,18 @@
       <view class="tn-countdown__item__time" :class="[fontColorClass]" :style="[letterStyle]">
         {{ d }}
       </view>
-	  <view
-	    class="tn-countdown__separator"
-	    :style="{
-	      fontSize: separatorSize + 'rpx',
-	      color: separatorColor,
-	      paddingBottom: separator === 'en' ? '4rpx' : 0
-	    }"
-	  >
-	    {{ separator === 'en' ? (showHours || showMinutes || showSeconds ? ':' : '')  : '天'}}
-	  </view>
     </view>
-    
+    <view 
+      v-if="showHours && (hideZeroDay || (!hideZeroDay && d != '00'))"
+      class="tn-countdown__separator"
+      :style="{
+        fontSize: separatorSize + 'rpx',
+        color: separatorColor,
+        paddingBottom: separator === 'en' ? '4rpx' : 0
+      }"
+    >
+      {{ separator === 'en' ? ':' : '天'}}
+    </view>
     
     <view
       v-if="showHours"
@@ -31,19 +31,18 @@
       <view class="tn-countdown__item__time" :class="[fontColorClass]" :style="[letterStyle]">
         {{ h }}
       </view>
-	  <view
-	    v-if="showMinutes"
-	    class="tn-countdown__separator"
-	    :style="{
-	      fontSize: separatorSize + 'rpx',
-	      color: separatorColor,
-	      paddingBottom: separator === 'en' ? '4rpx' : 0
-	    }"
-	  >
-	    {{ separator === 'en' ? ':' : '时'}}
-	  </view>
     </view>
-    
+    <view 
+      v-if="showMinutes"
+      class="tn-countdown__separator"
+      :style="{
+        fontSize: separatorSize + 'rpx',
+        color: separatorColor,
+        paddingBottom: separator === 'en' ? '4rpx' : 0
+      }"
+    >
+      {{ separator === 'en' ? ':' : '时'}}
+    </view>
     
     <view
       v-if="showMinutes"
@@ -54,43 +53,40 @@
       <view class="tn-countdown__item__time" :class="[fontColorClass]" :style="[letterStyle]">
         {{ m }}
       </view>
-		  <view
-			v-if="showSeconds"
-			class="tn-countdown__separator"
-			:style="{
-			  fontSize: separatorSize + 'rpx',
-			  color: separatorColor,
-			  paddingBottom: separator === 'en' ? '4rpx' : 0
-			}"
-		  >
-			{{ separator === 'en' ? ':' : '分'}}
-		</view>
     </view>
-   
-	  
-	  <view
-	    class="tn-countdown__item"
-	    :class="[backgroundColorClass]"
-	    :style="[itemStyle]"
+    <view 
       v-if="showSeconds"
-	  >
-	    <view class="tn-countdown__item__time" :class="[fontColorClass]" :style="[letterStyle]">
-	      {{ s }}
-	    </view>
-			<view
-			  class="tn-countdown__separator"
-			  :style="{
-				fontSize: separatorSize + 'rpx',
-				color: separatorColor,
-				paddingBottom: separator === 'en' ? '4rpx' : 0
-			  }"
-			>
-			  {{ separator === 'en' ? '' : '秒'}}
-			</view>
+      class="tn-countdown__separator"
+      :style="{
+        fontSize: separatorSize + 'rpx',
+        color: separatorColor,
+        paddingBottom: separator === 'en' ? '4rpx' : 0
+      }"
+    >
+      {{ separator === 'en' ? ':' : '分'}}
     </view>
     
-   
-    
+    <view
+      v-if="showSeconds"
+      class="tn-countdown__item"
+      :class="[backgroundColorClass]"
+      :style="[itemStyle]"
+    >
+      <view class="tn-countdown__item__time" :class="[fontColorClass]" :style="[letterStyle]">
+        {{ s }}
+      </view>
+    </view>
+    <view 
+      v-if="showSeconds && separator === 'cn'"
+      class="tn-countdown__separator"
+      :style="{
+        fontSize: separatorSize + 'rpx',
+        color: separatorColor,
+        paddingBottom: separator === 'en' ? '4rpx' : 0
+      }"
+    >
+      秒
+    </view>
   </view>
 </template>
 

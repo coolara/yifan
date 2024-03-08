@@ -20,9 +20,12 @@
             <slot name="back"></slot>
           </view>
         </view>
-        <view v-else class="tn-custom-nav-bar__bar__action" @tap="handlerBack">
-        	<text class="tn-custom-nav-bar__bar__action--nav-back" :class="[`tn-icon-${backIcon}`]"></text>
-        	<text class="tn-custom-nav-bar__bar__action--nav-back-text" v-if="backTitle">{{ backTitle }}</text>
+        <view v-else class="tn-custom-nav-bar__bar__action">
+        	<!-- <text class="tn-custom-nav-bar__bar__action--nav-back" :class="[`tn-icon-${backIcon}`]"></text>
+        	<text class="tn-custom-nav-bar__bar__action--nav-back-text" v-if="backTitle">{{ backTitle }}</text> -->
+			<image :src="getOssImg('navback')" mode="" class="tn-custom-nav-bar__bar__action--back" @tap="handlerBack"></image>
+			<text class="tn-custom-nav-bar__bar__action--line"></text>
+			<image :src="getOssImg('navhome')" mode="" class="tn-custom-nav-bar__bar__action--home" @tap="handlerHome"></image>
         </view>
       </view>
   		<view class="tn-custom-nav-bar__bar__content" :style="[contentStyle]">
@@ -84,7 +87,7 @@
       // 是否显示底部阴影
       bottomShadow: {
         type: Boolean,
-        default: true
+        default: false
       },
       // 是否自定义返回按钮
       customBack: {
@@ -244,6 +247,12 @@
           this.navBack()
         }
       },
+	  // 处理返回首页事件
+	  handlerHome(){
+		  uni.reLaunch({
+		    url: '/pages/index/index'
+		  })
+	  },
       // 返回上一页
       navBack() {
         
@@ -313,6 +322,12 @@
         height: 100%;
         justify-content: center;
         max-width: 100%;
+		
+		background: rgba(255,255,255,0.6);
+		border-radius: 50rpx;
+		border: 1rpx solid rgba(151,151,151,0.2);
+		padding: 15rpx 23rpx 15rpx 34rpx;
+		margin-left: 14rpx;
         
         &--nav-back {
           /* position: absolute; */
@@ -333,6 +348,24 @@
         &--nav-back-text {
           margin-left: 10rpx;
         }
+		
+		&--back{
+			width: 18rpx;
+			height: 34rpx;
+			margin-right: 35rpx;
+		}
+		
+		&--line{
+			width: 1rpx;
+			height: 37rpx;
+			background: rgba(0,0,0,0.2);
+		}
+		
+		&--home{
+			width: 38rpx;
+			height: 37rpx;
+			margin-left: 25rpx;
+		}
       }
       
       &__content {

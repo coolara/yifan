@@ -14,7 +14,7 @@
       <!-- 提示信息 -->
       <view
         v-if="tips.text"
-        class="tn-action-sheet__tips border-solid-bottom"
+        class="tn-action-sheet__tips tn-border-solid-bottom"
         :style="[tipsStyle]"
       >
         {{tips.text}}
@@ -23,7 +23,7 @@
       <block v-for="(item, index) in list" :key="index">
         <view
           class="tn-action-sheet__item tn-text-ellipsis"
-          :class="[ index < list.length - 1 ? 'border-solid-bottom' : '']"
+          :class="[ index < list.length - 1 ? 'tn-border-solid-bottom' : '']"
           :style="[itemStyle(index)]"
           hover-class="tn-hover-class"
           :hover-stay-time="150"
@@ -139,7 +139,7 @@
         }
       },
       elZIndex() {
-        return this.zIndex ? this.zIndex : this.$t.zIndex.popup
+        return this.zIndex ? this.zIndex : this.$tn.zIndex.popup
       }
     },
     methods: {
@@ -165,10 +165,6 @@
 </script>
 
 <style lang="scss" scoped>
-  
-  .border-solid-bottom{
-    border-bottom: 1rpx solid #F8F7F8;
-  }
   
   .tn-action-sheet {
     &__tips {
@@ -199,7 +195,7 @@
       
       &--gab {
         height: 12rpx;
-        background-color: #F8F7F8;
+        background-color: #eaeaec;
       }
     }
   }
