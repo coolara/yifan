@@ -10,6 +10,19 @@
       }
     }
   ],
+  "subPackages": [
+    {
+      "root": "login",
+      "pages": [
+        {
+          "path": "register/register",
+          "style": {
+            "navigationBarTitleText": "uni-app"
+          }
+        }
+      ]
+    }
+  ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
