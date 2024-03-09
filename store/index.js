@@ -43,7 +43,23 @@ const store = new Vuex.Store({
     // 状态栏高度
     vuex_status_bar_height: 0,
     // 自定义导航栏的高度
-    vuex_custom_bar_height: 0
+    vuex_custom_bar_height: 0,
+    customInput: {
+      height: "92rpx",
+      background: "#F8F8F8",
+      borderRadius: "16rpx",
+      lineHeight: "42rpx",
+      paddingLeft: "30rpx",
+      fontWeight: 400
+    },
+    inputPlaceHolder:`font-size: 30rpx color: #ADADAD; font-weight: 400`,
+    mainBtn: {
+      backgroundColor: "#40185A",
+      color: "#fff",
+      fontSize: "30rpx",
+      borderRadius: "16rpx",
+    },
+    assetPath: 'https://gymoo-project-cdn.oss-cn-shenzhen.aliyuncs.com/yifan/mini-program/'
   },
   mutations: {
     $tStore(state, payload) {

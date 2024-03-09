@@ -1,11 +1,7 @@
 <template>
   <view class="content">
-    <image class="logo" src="/static/logo.png"></image>
     <view class="text-area">
-      <text class="title">{{ title }}</text>
-      <tn-button backgroundColor="tn-bg-blue" fontColor="tn-color-primary"
-        >自定义颜色按钮</tn-button
-      >
+      <tn-button @click="$goPage('binduser')">register</tn-button>
     </view>
   </view>
 </template>
@@ -17,7 +13,12 @@ export default {
       title: "Hello",
     };
   },
-  onLoad() {},
+  onLoad() {
+
+    this.$goPage({
+      name: 'login',
+    })
+  },
   methods: {},
 };
 </script>

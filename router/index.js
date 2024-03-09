@@ -85,6 +85,7 @@ function customRoute(config) {
 	let _params = typeof config === 'string' ? {} : config.params || {}
 	let _type = typeof config === 'string' ? 'navigateTo' : config.type || 'navigateTo'
 	let _url = mixinParam(routers[_routeName], _params)
+	console.log(routers)
 
 	if (_type === 'navigateTo' || _type === 'to') {
 		uni.navigateTo({ url: _url })

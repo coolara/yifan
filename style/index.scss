@@ -1,6 +1,46 @@
+$main-color: #40185A;
 .main-color{
-    color: $tn-main-color
+    color: $main-color;
 }
 .main-bg {
-    background-color: $tn-main-color;
+    background-color: $main-color;
 }
+
+// 自定义样式
+.f30 {
+    font-size: 30rpx;
+}
+.fw5{
+    font-weight: 500;
+}
+.mt16{
+    margin-top: 16rpx;
+}
+
+.text-divider {
+    position: relative;
+    &::before {
+        content: ' ';
+        border-top:1rpx solid #dedede;
+        position: absolute;
+        left: -68rpx;
+        top: 13rpx;
+        width: 48rpx;
+    }
+    &::after{
+        content: ' ';
+        border-top:1rpx solid #dedede;
+        position: absolute;
+        right:-68rpx;
+        top: 13rpx;
+        width: 48rpx;
+    }
+}
+
+// UI 重写样式
+tn-button {
+    /deep/.tn-btn{
+        font-weight: 400;
+    }
+}
+

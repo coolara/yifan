@@ -2,6 +2,13 @@
   "easycom": {
     "^tn-(.*)": "@/tuniao-ui/components/tn-$1/tn-$1.vue"
   },
+  "insetLoader": {
+    "config": {
+      "mToast": "<m-toast ref='toast' />"
+    },
+    "label": ["mToast"],
+    "rootEle": "view"
+  },
   "pages": [
     {
       "path": "pages/index/index",
@@ -15,9 +22,24 @@
       "root": "login",
       "pages": [
         {
-          "path": "register/register",
+          "routeName": "register",
+          "path": "register",
           "style": {
-            "navigationBarTitleText": "uni-app"
+            "navigationBarTitleText": "注册"
+          }
+        },
+        {
+          "routeName": "login",
+          "path": "login",
+          "style": {
+            "navigationBarTitleText": "登录"
+          }
+        },
+        {
+          "routeName": "binduser",
+          "path": "binduser",
+          "style": {
+            "navigationBarTitleText": ""
           }
         }
       ]
@@ -29,5 +51,15 @@
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
-  "uniIdRouter": {}
+  "uniIdRouter": {},
+  "condition": {
+    "current": 0,
+    "list": [
+      {
+        "name": "",
+        "path": "",
+        "query": ""
+      }
+    ]
+  }
 }
