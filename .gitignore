@@ -1,4 +1,5 @@
 unpackage/
 .vscode/
 .hbuilderx/
+node_modules/
 yarn-error.log
